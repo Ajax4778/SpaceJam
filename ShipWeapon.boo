@@ -4,42 +4,43 @@ class ShipWeapon(MonoBehaviour):
 
 	# laser
 	public laser as GameObject
-	private laserSpeed = 200.0f
-	private maxLaserFire = 5
-	
-	private laserTimer = 0.0
-	private laserCoolDown = 1.0
 	public laserSoundEnabled = true
 	public laserSound as AudioClip
-	
+
+	private laserSpeed = 200.0f
+	private maxLaserFire = 5
+	private laserTimer = 0.0
+	private laserCoolDown = 3.0
+
 	# missile
 	public missile as GameObject
-	private missileSpeed = 120.0f
 	public missileAmmo as single
-	public maxMissileAmmo = 40
-	public startMissileCount = 5
 	public missileLaunchSound as AudioClip
 	public emptyClipSound as AudioClip
-	
+	public maxMissileAmmo = 40
+	public startMissileCount = 15
+
+	private missileSpeed = 120.0f
+
 	# nuke
 	public nuke as GameObject
-	private nukeSpeed = 50.0f
 	public nukeAmmo as single
-	public maxNukeAmmo = 10
-	public startNukeCount = 2
 	public nukeLaunched = false
 	public nukeLaunchSound as AudioClip
 	public nukeExplSound as AudioClip
-	
+	public maxNukeAmmo = 15
+	public startNukeCount = 5
+
+	private nukeSpeed = 50.0f
+
 	def Start():
 		missileAmmo = startMissileCount
 		nukeAmmo = startNukeCount
 		GetComponent[of AudioSource]().clip = laserSound
 		GetComponent[of AudioSource]().rolloffMode = AudioRolloffMode.Linear
 		GetComponent[of AudioSource]().volume = 0.25
-		
+
 	def Update():
-		
 		if Input.GetKeyDown("space"):
 			FireLaser()
 		if Input.GetKeyDown("m"):
@@ -52,7 +53,7 @@ class ShipWeapon(MonoBehaviour):
 		// On detonation, nukes are tagged as "Untagged".
 		if len(GameObject.FindGameObjectsWithTag("nuke")) == 0: nukeLaunched = false
 		else: nukeLaunched = true
-		
+
 	def FireLaser():
 		if laserSoundEnabled == false:
 			GetComponent[of AudioSource]().clip = laserSound
@@ -65,25 +66,25 @@ class ShipWeapon(MonoBehaviour):
 			lShot.GetComponent[of Rigidbody]().velocity = Vector3.right * laserSpeed
 			i += 1
 		GetComponent[of AudioSource]().Play()
-			
+
 	def FireMissile():
 		if missileAmmo > 0:
 			GetComponent[of AudioSource]().clip = missileLaunchSound
 			laserSoundEnabled = false
 			GetComponent[of AudioSource]().volume = 0.5
-			
+
 			mShot = Instantiate(missile, transform.position, Quaternion.identity) as GameObject
 			mShot.transform.Rotate(0,0,90)
 			mShot.GetComponent[of Rigidbody]().velocity = Vector3.right * missileSpeed
 			missileAmmo -= 1
-			
+
 			GetComponent[of AudioSource]().Play()
 		else:
 			GetComponent[of AudioSource]().clip = emptyClipSound
 			laserSoundEnabled = false
 			GetComponent[of AudioSource]().volume = 0.1
 			GetComponent[of AudioSource]().Play()
-	
+
 	def FireNuke():
 		if nukeLaunched == false:
 			if nukeAmmo > 0:
@@ -107,10 +108,10 @@ class ShipWeapon(MonoBehaviour):
 			GetComponent[of AudioSource]().clip = nukeExplSound
 			GetComponent[of AudioSource]().volume = 1.0
 			GetComponent[of AudioSource]().Play()
-	
+
 	def OnGUI():
 		GUI.Label(Rect(10,35,60,20), "Missiles:")
 		GUI.Label(Rect(75,35,20,20), missileAmmo.ToString())
-		
+
 		GUI.Label(Rect(10,60,60,20), "Nukes:")
 		GUI.Label(Rect(75,60,20,20), nukeAmmo.ToString())
