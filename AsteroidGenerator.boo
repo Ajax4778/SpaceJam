@@ -64,8 +64,8 @@ class AsteroidGenerator (MonoBehaviour):
 	def OnGUI():
 		if startScreen == true:
 			GUI.color = Color.cyan
-			GUI.Button(Rect(Screen.width / 4, Screen.height / 4 , Screen.width / 2, Screen.height / 2), "ASTEROIDS 2013")
-			GUI.Button(Rect(Screen.width / 4, 3 * Screen.height / 4 + 10, Screen.width / 2, Screen.height / 6), 'Choose difficulty level: \n \n [1] Were it so easy. \n [2] Less than twelve parsecs. \n [3] Don\'t panic. \n [4] Resistance is futile.')
+			GUI.Button(Rect(Screen.width / 4, Screen.height / 8 , Screen.width / 2, Screen.height / 3), "SpaceJam 2013 \n \n \n Thrusters: [arrow keys]    Lasers: [spacebar]    Missiles: [m]    Nukes: [n] \n \n Pause: [p]")
+			GUI.Button(Rect(Screen.width / 4, Screen.height * 0.55, Screen.width / 2, Screen.height / 3), "To begin, choose difficulty level by number: \n \n [1] Were it so easy. \n \n [2] Less than twelve parsecs. \n \n [3] Don't panic. \n \n [4] Resistance is futile.")
 		
 		if startScreen == false:
 			GUI.color = Color.white
