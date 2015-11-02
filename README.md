@@ -1,7 +1,8 @@
 # SpaceJam
 Boo scripts for Unity3D side-scrolling space shooter.
 
-[Demo link.](www.adithyamanohar.com) <-- not yet live
+[Live link.](www.adithyamanohar.com/SpaceJam)  
+(Unity Web Player required; please use Firefox or Safari.)
 
 SpaceJam was created using the Boo programming language on the Unity 3D engine in March 2013.
 In writing this code, I taught myself the principles of object oriented programming
